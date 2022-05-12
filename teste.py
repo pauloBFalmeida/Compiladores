@@ -1,13 +1,24 @@
 from ply import lex
 from ply import yacc
 
-keywords = (
-	'DEF', 'BREAK', 'READ', 'RETURN', 'IF', 'ELSE',
-	'FOR', 'NEW', 'NULL', 'PRINT'	
-)
+keywords = {
+	'def': 'DEF',
+	'break': 'BREAK',
+	'read': 'READ',
+	'return': 'RETURN',
+	'if': 'IF',
+	'else': 'ELSE'
+	'for': 'FOR',
+	'new': 'NEW',
+	'null': 'NULL',
+	'print': 'PRINT',
+	'int': 'INT',
+	'float': 'FLOAT',
+	'string': 'STRING'
+}
 
-tokens = keywords + (
-	'IDENT', 'INT', 'FLOAT', 'STRING', 'INT_CONSTANT',
+tokens = list(keywords.values()) + (
+	'IDENT', 'INT_CONSTANT',
 	'FLOAT_CONSTANT', 'STRING_CONSTANT',
 	'LPARENTESES', 'RPARENTESES', 'LBRACKET', 'RBRACKET',
 	'LCURLYBRACKET', 'RCURLYBRACKET', 'SEMICOLON', 'COMMA',
@@ -18,20 +29,19 @@ tokens = keywords + (
 
 def t_IDENT(t):
 	r'[a-zA-Z][a-zA-Z0-9_]*'
-	if t.value in keywords:
-		t.type = t.value
+	t.type = keywords.get(t.value, 'IDENT')
 	return t
 
 
-def t_INT(t):
-	r'[0-9]+'
+def t_INT_CONSTANT(t):
+	r'\d+'
 	return t
 
-def t_FLOAT(t):
+def t_FLOAT_CONSTANT(t):
 	r'\d+\.\d+(E[+-]?\d+)?'
 	return t
 
-def t_STRING(t):
+def t_STRING_CONSTANT(t):
 	r'\".*?\"'
 	return t
 
@@ -61,7 +71,7 @@ def t_COMMENT(t):
      r'\#.*'
      pass
 
-t_ignore_COMMENT = r'\#.*'
+# t_ignore_COMMENT = r'\#.*'
 
 # Define a rule so we can track line numbers
  def t_newline(t):
