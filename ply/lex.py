@@ -118,6 +118,7 @@ class Lexer:
         self.lexliterals = ''         # Literal characters that can be passed through
         self.lexmodule = None         # Module
         self.lineno = 1               # Current line number
+        self.colno = 1               # Current line number
 
     def clone(self, object=None):
         c = copy.copy(self)
@@ -207,6 +208,8 @@ class Lexer:
         lexdata   = self.lexdata
 
         while lexpos < lexlen:
+            self.colno += 1
+
             # This code provides some short-circuit code for whitespace, tabs, and other ignored characters
             if lexdata[lexpos] in lexignore:
                 lexpos += 1

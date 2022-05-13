@@ -7,17 +7,17 @@ keywords = {
 	'read': 'READ',
 	'return': 'RETURN',
 	'if': 'IF',
-	'else': 'ELSE'
+	'else': 'ELSE',
 	'for': 'FOR',
 	'new': 'NEW',
 	'null': 'NULL',
 	'print': 'PRINT',
 	'int': 'INT',
 	'float': 'FLOAT',
-	'string': 'STRING'
+	'string': 'STRING',
 }
 
-tokens = list(keywords.values()) + (
+tokens = list(keywords.values()) + [
 	'IDENT', 'INT_CONSTANT',
 	'FLOAT_CONSTANT', 'STRING_CONSTANT',
 	'LPARENTESES', 'RPARENTESES', 'LBRACKET', 'RBRACKET',
@@ -25,7 +25,7 @@ tokens = list(keywords.values()) + (
 	'ASSIGNMENT', 'EQUAL', 'MINUS', 'PLUS', 'LESSTHAN', 
 	'GREATERTHAN', 'LESSEQUAL', 'GREATEREQUAL', 'DIFFERENT',
 	'DIV', 'MOD', 'MULT'
-)
+]
 
 def t_IDENT(t):
 	r'[a-zA-Z][a-zA-Z0-9_]*'
@@ -33,13 +33,14 @@ def t_IDENT(t):
 	return t
 
 
+def t_FLOAT_CONSTANT(t):
+	r'\d+\.\d+(E[+-]?\d+)?'
+	return t
+	
 def t_INT_CONSTANT(t):
 	r'\d+'
 	return t
 
-def t_FLOAT_CONSTANT(t):
-	r'\d+\.\d+(E[+-]?\d+)?'
-	return t
 
 def t_STRING_CONSTANT(t):
 	r'\".*?\"'
@@ -66,28 +67,46 @@ t_DIV	= r'/'
 t_MOD	= r'%'
 t_MULT	= r'\*'
 
+t_ignore = ' \t'
 
 def t_COMMENT(t):
-     r'\#.*'
-     pass
+	r'\#.*'	
+	pass
 
 # t_ignore_COMMENT = r'\#.*'
 
 # Define a rule so we can track line numbers
- def t_newline(t):
-     r'\n+'
-     t.lexer.lineno += len(t.value)
+def t_newline(t):
+	r'\n+'
+	t.lexer.lineno += len(t.value)
+	t.lexer.colno = 1
 
 # Compute column.
- #     input is the input text string
- #     token is a token instance
- def find_column(input, token):
-     line_start = input.rfind('\n', 0, token.lexpos) + 1
-     return (token.lexpos - line_start) + 1
+#     input is the input text string
+#     token is a token instance
+def find_column(input, token):
+	line_start = input.rfind('\n', 0, token.lexpos) + 1
+	return (token.lexpos - line_start) + 1
 
 # TODO:
-# # Error handling rule
-# def t_error(t):
-#      print("Illegal character '%s' at line '%i' character '%i'" 
-#      		% t.value[0], %t.lexer.lineno, find_column())
-#      t.lexer.skip(1)
+# Error handling rule
+def t_error(t):
+	print(t.lexer.lexpos)
+	# print(f"Illegal character {t.value[0]} at line {t.lexer.lineno} character {find_column(t.lexer.line, t.value[0])}")
+	print(f"Illegal character {t.value[0]} at line {t.lexer.lineno} column {t.lexer.colno}")
+	t.lexer.skip(1)
+
+
+with open("exemplo1.lcc", 'r+') as f:
+	data = f.read()
+
+lexer = lex.lex()
+lexer.input(data)
+
+# # with open('out.txt', 'w') as f:
+while True:
+	tok = lexer.token()
+	if not tok: 
+		break     # No more input
+	print(tok)
+# 		# f.write(str(tok))
