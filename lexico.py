@@ -22,7 +22,7 @@ tokens = list(keywords.values()) + [
 	'FLOAT_CONSTANT', 'STRING_CONSTANT',
 	'LPARENTESES', 'RPARENTESES', 'LBRACKET', 'RBRACKET',
 	'LCURLYBRACKET', 'RCURLYBRACKET', 'SEMICOLON', 'COMMA',
-	'ASSIGNMENT', 'EQUAL', 'MINUS', 'PLUS', 'LESSTHAN', 
+	'ASSIGNMENT', 'EQUAL', 'MINUS', 'PLUS', 'LESSTHAN',
 	'GREATERTHAN', 'LESSEQUAL', 'GREATEREQUAL', 'DIFFERENT',
 	'DIV', 'MOD', 'MULT'
 ]
@@ -36,7 +36,7 @@ def t_IDENT(t):
 def t_FLOAT_CONSTANT(t):
 	r'\d+\.\d+(E[+-]?\d+)?'
 	return t
-	
+
 def t_INT_CONSTANT(t):
 	r'\d+'
 	return t
@@ -57,7 +57,7 @@ t_COMMA = r'\,'
 t_ASSIGNMENT = r'='
 t_EQUAL 	= r'=='
 t_MINUS 	= r'-'
-t_PLUS 		= r'\+' 
+t_PLUS 		= r'\+'
 t_LESSTHAN	= r'<'
 t_GREATERTHAN	= r'>'
 t_LESSEQUAL		= r'<='
@@ -70,7 +70,7 @@ t_MULT	= r'\*'
 t_ignore = ' \t'
 
 def t_COMMENT(t):
-	r'\#.*'	
+	r'\#.*'
 	pass
 
 # t_ignore_COMMENT = r'\#.*'
@@ -91,13 +91,12 @@ def find_column(input, token):
 # TODO:
 # Error handling rule
 def t_error(t):
-	print(t.lexer.lexpos)
-	# print(f"Illegal character {t.value[0]} at line {t.lexer.lineno} character {find_column(t.lexer.line, t.value[0])}")
 	print(f"Illegal character {t.value[0]} at line {t.lexer.lineno} column {t.lexer.colno}")
+	# print(f"Illegal character {t.value[0]} at line {t.lexer.lineno} character {find_column(t.lexer.line, t.value[0])}")
 	t.lexer.skip(1)
 
 
-with open("exemplo1.lcc", 'r+') as f:
+with open("entradas/exemplo1.lcc", 'r+') as f:
 	data = f.read()
 
 lexer = lex.lex()
@@ -106,7 +105,7 @@ lexer.input(data)
 # # with open('out.txt', 'w') as f:
 while True:
 	tok = lexer.token()
-	if not tok: 
+	if not tok:
 		break     # No more input
 	print(tok)
 # 		# f.write(str(tok))

@@ -118,7 +118,7 @@ class Lexer:
         self.lexliterals = ''         # Literal characters that can be passed through
         self.lexmodule = None         # Module
         self.lineno = 1               # Current line number
-        self.colno = 1               # Current line number
+        self.colno  = 0               # Current column number in line
 
     def clone(self, object=None):
         c = copy.copy(self)
@@ -208,11 +208,11 @@ class Lexer:
         lexdata   = self.lexdata
 
         while lexpos < lexlen:
-            self.colno += 1
 
             # This code provides some short-circuit code for whitespace, tabs, and other ignored characters
             if lexdata[lexpos] in lexignore:
                 lexpos += 1
+                self.colno += 1
                 continue
 
             # Look for a regular expression match
@@ -226,6 +226,7 @@ class Lexer:
                 tok.value = m.group()
                 tok.lineno = self.lineno
                 tok.lexpos = lexpos
+                self.colno += len(tok.value)      # length of character in the token
 
                 i = m.lastindex
                 func, tok.type = lexindexfunc[i]
@@ -717,7 +718,7 @@ class LexerReflect(object):
 #
 # Build all of the regular expression rules from definitions in the supplied module
 # -----------------------------------------------------------------------------
-def lex(*, module=None, object=None, debug=False, 
+def lex(*, module=None, object=None, debug=False,
         reflags=int(re.VERBOSE), debuglog=None, errorlog=None):
 
     global lexer
