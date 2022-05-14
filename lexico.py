@@ -96,7 +96,7 @@ def t_error(t):
 	t.lexer.skip(1)
 
 
-with open("entradas/exemplo1.lcc", 'r+') as f:
+with open("entradas/exemplo1.lcc", 'r+', encoding="utf-8") as f:
 	data = f.read()
 
 lexer = lex.lex()
