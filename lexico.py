@@ -32,7 +32,6 @@ def t_IDENT(t):
 	t.type = keywords.get(t.value, 'IDENT')
 	return t
 
-
 def t_FLOAT_CONSTANT(t):
 	r'\d+\.\d+(E[+-]?\d+)?'
 	return t
@@ -40,7 +39,6 @@ def t_FLOAT_CONSTANT(t):
 def t_INT_CONSTANT(t):
 	r'\d+'
 	return t
-
 
 def t_STRING_CONSTANT(t):
 	r'\".*?\"'
@@ -70,10 +68,8 @@ t_MULT	= r'\*'
 t_ignore = ' \t'
 
 def t_COMMENT(t):
-	r'\#.*'
+	r'\/\/.*'
 	pass
-
-# t_ignore_COMMENT = r'\#.*'
 
 # Define a rule so we can track line numbers
 def t_newline(t):
@@ -81,31 +77,25 @@ def t_newline(t):
 	t.lexer.lineno += len(t.value)
 	t.lexer.colno = 1
 
-# Compute column.
-#     input is the input text string
-#     token is a token instance
-def find_column(input, token):
-	line_start = input.rfind('\n', 0, token.lexpos) + 1
-	return (token.lexpos - line_start) + 1
-
-# TODO:
 # Error handling rule
 def t_error(t):
 	print(f"Illegal character {t.value[0]} at line {t.lexer.lineno} column {t.lexer.colno}")
-	# print(f"Illegal character {t.value[0]} at line {t.lexer.lineno} character {find_column(t.lexer.line, t.value[0])}")
+	error_has_occurred = True
 	t.lexer.skip(1)
 
-
-with open("entradas/exemplo1.lcc", 'r+', encoding="utf-8") as f:
+# Read entry file
+with open("entradas/exemplo3.lcc", 'r', encoding="utf-8") as f:
+	error_has_occurred = False
 	data = f.read()
 
 lexer = lex.lex()
 lexer.input(data)
 
-# # with open('out.txt', 'w') as f:
 while True:
 	tok = lexer.token()
 	if not tok:
 		break     # No more input
-	print(tok)
+
+	if (not error_has_occurred):
+		print(tok)
 # 		# f.write(str(tok))

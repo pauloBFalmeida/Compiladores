@@ -1,0 +1,21 @@
+def fib(int n)
+{
+  if (n <= 1){
+    return n;
+  }
+  int a = n-1;
+  int b = n-2;
+  int c = fib(a);
+  int d = fib(b);
+  int e = c + d;
+
+  return e;
+}
+
+def main()
+{
+    int n = 9;
+    int x = fib(n);
+    print x;
+    return;
+}
