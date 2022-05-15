@@ -6,9 +6,6 @@ from ply.lex import LexToken
 
 TYPES_TO_STORE = [
     "IDENT",
-    "INT_CONSTANT",
-    "FLOAT_CONSTANT",
-    "STRING_CONSTANT",
 ]
 
 

@@ -109,7 +109,7 @@ def main() {
 
     octalNumberString = toString(decimalNumberToOctal);
     binaryNumberString = toString(decimalNumberToBinary);
-    decimalNumberString = toSring(decimalNumber);
+    decimalNumberString = toString(decimalNumber);
 
     print(decimalNumberString + " in binary = " + binaryNumberString);
     print(decimalNumberString + " in octal = " + octalNumberString);

@@ -98,6 +98,7 @@ class CC20221Lexer:
     #  Define a rule so we can track line numbers
     def t_newline(self, t):
         r"\n+"
+        t.lexer.lineno += len(t.value)
         t.lexer.colno = 1
 
     #  Error handling rule
