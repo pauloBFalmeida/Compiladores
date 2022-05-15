@@ -4,7 +4,7 @@ def stringLenght(string input) {
     int i;
     int lenght;
     lenght = 0;
-]2@
+]
     for (i = 0; s[i] != "\0"; i = i + 1 ) {
         lenght = lenght + 1;
     }
