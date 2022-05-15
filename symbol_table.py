@@ -5,7 +5,7 @@ from ply.lex import LexToken
 
 
 TYPES_TO_STORE = [
-    "IDENT",
+    "IDENT"
 ]
 
 

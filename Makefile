@@ -20,3 +20,16 @@ primeNumbers:
 
 strings:
 	python main.py examples/strings.lcc
+
+# Use `make run <name of task>` to run that specific task
+run:
+	$(task)
+
+# Use `make runall` to run all tasks
+runall:
+	exemplo1
+	exemplo2
+	exemplo3
+	baseConversions
+	primeNumbers
+	strings
