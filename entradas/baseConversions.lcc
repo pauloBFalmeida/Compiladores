@@ -1,0 +1,118 @@
+
+// Função que converte número inteiro binário para número inteiro decimal
+def convertBinaryToDecimal(int binaryNumber) {
+  int decimalNumber;
+  decimalNumber = 0; 
+  int i; 
+  int remainder;
+
+  for (i = 0; binaryNumber != 0, i = i + i) {
+    remainder = binaryNumber % 10;
+    binaryNumber = binaryNumber / 10;
+    decimalNumber = decimalNumber + (remainder * pow(2, i));
+  }
+
+  return decimalNumber;
+}
+
+// Função que converte número inteiro decimal para número inteiro binário
+def convertDecimalToBinary(int decimalNumber) {
+
+    int binaryNumber;
+    binaryNumber = 0;
+    int i;
+
+    for (i = 1; decimalNumber != 0, i = i*2)
+    {
+        binaryNumber = binaryNumber + (decimalNumber % 2) * i;
+        decimalNumber = decimalNumber / 2;
+    }
+
+    return binaryNumber;
+}
+
+// Função que converte número inteiro decimal para número inteiro octal
+def convertDecimalToOctal(int decimalNumber) {
+
+    int octalNumber;
+    octalNumber = 0;
+    int i;
+
+    for (i = 1; decimalNumber != 0; i = i * 8) {
+
+        octalNumber = octalNumber + (decimalNumber % 8) * i;
+        decimalNumber = decimalNumber / 8;
+    }
+
+    return octalNumber;
+}
+
+// Função que converte número inteiro octal para número inteiro binário
+def convertOctalToBinary(int octalNumber) {
+
+    int binaryNumber;
+    binaryNumber = 0;
+    int i;
+
+    for (i = 1; octalNumber != 0; i = i * 2) {
+
+        binaryNumber = binaryNumber + (octalNumber % 2) * i;
+        octalNumber = octalNumber / 2;
+    }
+
+    return binaryNumber;
+}
+
+// Função que converte número inteiro binário para número inteiro octal
+def convertBinaryToOctal(int binaryNumber) {
+
+    int octalNumber;
+    octalNumber = 0;
+    int i;
+
+    for (i = 1; binaryNumber != 0; i = i * 8) {
+
+        octalNumber = octalNumber + (binaryNumber % 8) * i;
+        binaryNumber = binaryNumber / 8;
+    }
+
+    return octalNumber;
+}
+
+def main() {
+
+    int decimalNumber;
+
+    printf("Enter a integer number: ");
+    read(decimalNumber);
+
+    int decimalNumberToOctal;
+    int decimalNumberToBinary;
+
+    decimalNumberToOctal = convertDecimalToOctal(decimalNumber);
+    decimalNumberToBinary = convertDecimalToBinary(decimalNumber);
+
+    int octalNumberToBinary;
+    int binaryNumberToOctal;
+
+    octalNumberToBinary = convertOctalToBinary(decimalNumberToOctal);
+    binaryNumberToOctal = convertBinaryToOctal(decimalNumberToOctal);
+
+    if (octalNumberToBinary != binaryNumberToOctal) {
+        print("Há algum erro na conversão");
+        return 0;
+    }
+
+    string octalNumberString;
+    string binaryNumberString;
+    string decimalNumberString;
+
+    octalNumberString = toString(decimalNumberToOctal);
+    binaryNumberString = toString(decimalNumberToBinary);
+    decimalNumberString = toSring(decimalNumber);
+
+    print(decimalNumberString + " in binary = " + binaryNumberString);
+    print(decimalNumberString + " in octal = " + octalNumberString);
+
+    return 1;
+}
