@@ -118,7 +118,7 @@ class Lexer:
         self.lexliterals = ''         # Literal characters that can be passed through
         self.lexmodule = None         # Module
         self.lineno = 1               # Current line number
-        self.colno  = 0               # Current column number in line
+        self.colno  = 1               # Current column number in line
 
     def clone(self, object=None):
         c = copy.copy(self)
