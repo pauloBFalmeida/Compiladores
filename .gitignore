@@ -1,2 +1,8 @@
 *__pycache__
+
 *.vscode
+*.idea
+*.mypy_cache
+
+# *parser.out
+# *parsetab.py

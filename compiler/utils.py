@@ -24,15 +24,23 @@ SymbolTable = Dict[str, SymbolTableEntry]
 def create_symbol_table(tokens: List[LexToken]) -> SymbolTable:
     """Create symbol table from tokens read in source code"""
     symbol_table: SymbolTable = {}
-    for id, token in enumerate(tokens):
-        if token.type in TYPES_TO_STORE:
-            if token.value not in symbol_table:
-                symbol_table[token.value] = SymbolTableEntry(
-                    var_name=token.value,
-                    token_id=id,
-                    line_declared=token.lineno,
+    for i, token in enumerate(tokens):
+        if token.type in TYPES_TO_STORE:  # type: ignore
+            if token.value not in symbol_table:  # type: ignore
+                symbol_table[token.value] = SymbolTableEntry(  # type: ignore
+                    var_name=token.value,  # type: ignore
+                    token_id=i,
+                    line_declared=token.lineno,  # type: ignore
                     lines_referenced=[],
                 )
             else:
-                symbol_table[token.value].lines_referenced.append(token.lineno)
+                symbol_table[token.value].lines_referenced.append(token.lineno)  # type: ignore
     return symbol_table
+
+
+@dataclass
+class Scope:
+    pass
+
+
+ScopeStack = List[Scope]

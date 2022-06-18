@@ -1,5 +1,17 @@
-from lexic_analyser import CC20221Lexer, IllegalTokenError
-from symbol_table import SymbolTable, create_symbol_table
+"""
+Trabalho de Compiladores 2022-1
+
+Integrantes:
+    * Helena Aires
+    * Paola Abel
+    * Paulo Almeida
+    * Pedro Aquino
+
+Exercício-Programa 2: Analisador Sintático
+"""
+
+from lexical_analyser import CC20221Lexer, IllegalTokenError
+from utils import SymbolTable, create_symbol_table
 
 
 def exercicio_programa1(filename):
@@ -26,8 +38,12 @@ def exercicio_programa1(filename):
             print(row)
 
 
+def exercicio_programa2():
+    pass
+
+
 if __name__ == "__main__":
-    # TODO: change this to use argparse
+    # TODO: maybe change this to use argparse
     import sys
 
     try:

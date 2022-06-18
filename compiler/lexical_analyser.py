@@ -2,7 +2,7 @@ from ply import lex
 
 
 class CC20221Lexer:
-    """Lexic Analyser for CC-2022-1 Language"""
+    """Lexical Analyser for CC-2022-1 Language"""
 
     def __init__(self, **kwargs) -> None:
         self.lexer = lex.lex(module=self, **kwargs)
@@ -29,18 +29,22 @@ class CC20221Lexer:
         "INT_CONSTANT",
         "FLOAT_CONSTANT",
         "STRING_CONSTANT",
-        "LPARENTESES",
-        "RPARENTESES",
+
+        "LPARENTHESIS",
+        "RPARENTHESIS",
         "LBRACKET",
         "RBRACKET",
         "LCURLYBRACKET",
         "RCURLYBRACKET",
+
         "SEMICOLON",
         "COMMA",
+
         "ASSIGNMENT",
         "EQUAL",
         "MINUS",
         "PLUS",
+
         "LESSTHAN",
         "GREATERTHAN",
         "LESSEQUAL",
@@ -68,8 +72,8 @@ class CC20221Lexer:
         r"\".*?\""
         return t
 
-    t_LPARENTESES = r"\("
-    t_RPARENTESES = r"\)"
+    t_LPARENTHESIS = r"\("
+    t_RPARENTHESIS = r"\)"
     t_LBRACKET = r"\["
     t_RBRACKET = r"\]"
     t_LCURLYBRACKET = r"{"
@@ -110,16 +114,17 @@ class CC20221Lexer:
     def token(self):
         return self.lexer.token()
 
-    def tokenize(self, source_code):
+    def input(self, source_code):
         """Create list of tokens from source code"""
         self.lexer.input(source_code)
-        tokens = []
-        while True:
-            tok = self.lexer.token()
-            if not tok:
-                break  # No more input
-            tokens.append(tok)
-        return tokens
+        # tokens = []
+        # while True:
+        #     tok = self.lexer.token()
+        #     if not tok:
+        #         break  # No more input
+        #     tokens.append(tok)
+        # return tokens
+
 
 
 class IllegalTokenError(Exception):
