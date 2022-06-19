@@ -18,7 +18,7 @@ from compiler.syntactic_analyzer import CC20221SyntacticAnalyzer
 from compiler.utils import SymbolTable, create_symbol_table
 
 
-def exercicio_programa1(source_code: str):
+def exercicio_programa1(source_code: str) -> None:
     """Analisador léxico"""
     lexer = CC20221Lexer()
 
@@ -39,10 +39,11 @@ def exercicio_programa1(source_code: str):
             print(row)
 
 
-def exercicio_programa2(s):
+def exercicio_programa2(source_code: str) -> None:
     """Analisador sintático"""
     parser = CC20221SyntacticAnalyzer()
-    parser.parse(s, debug=True)
+    output = parser.parse(source_code)
+    print(output)
 
 
 if __name__ == "__main__":
@@ -58,9 +59,9 @@ if __name__ == "__main__":
         print("Favor inserir um nome de arquivo válido :(")
     
     if s:        
-        if sys.argv[2] == "ep1":
+        if sys.argv[2] == "lexical":
             exercicio_programa1(s)
-        elif sys.argv[2] == "ep2":
+        elif sys.argv[2] == "syntactic":
             exercicio_programa2(s)
         else:
             print("Essa tarefa ainda não foi implementada :(")

@@ -2,26 +2,30 @@
 PYTHON_VERSION_MIN=3.8.10
 PYTHON_VERSION_USED=3.9.7
 
-# Execute any of the following tasks to run an example
-bananaTest: 
-	python main.py bananaTest ep2
 
-baseConversions:
-	python main.py examples/baseConversions.lcc ep2
+# Execute any of the following tasks to run a Lexical Analyzer example
+lexical_bananaTest: 
+	python main.py examples/bananaTest.ccc lexical
 
-primeNumbers:
-	python main.py examples/primeNumbers.lcc ep2
+lexical_baseConversions:
+	python main.py examples/baseConversions.ccc lexical
 
-strings:
-	python main.py examples/strings.lcc ep2
+lexical_primeNumbers:
+	python main.py examples/primeNumbers.ccc lexical
 
-# Use `make run <name of task>` to run that specific task
-run:
-	$(task)
+lexical_strings:
+	python main.py examples/strings.ccc lexical
 
-# Use `make runall` to run all tasks
-runall:
-	bananaTest
-	baseConversions
-	primeNumbers
-	strings
+
+# Execute any of the following tasks to run a Syntactic Analyzer example
+syntactic_bananaTest: 
+	python main.py examples/bananaTest.ccc syntactic
+
+syntactic_baseConversions:
+	python main.py examples/baseConversions.ccc syntactic
+
+syntactic_primeNumbers:
+	python main.py examples/primeNumbers.ccc syntactic
+
+syntactic_strings:
+	python main.py examples/strings.ccc syntactic

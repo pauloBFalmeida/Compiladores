@@ -171,11 +171,11 @@ class CC20221SyntacticAnalyzer:
         pass
 
     def p_expression(self, p):
-        "EXPRESSION : NUMEXPRESSION OPT_REL_OP_NUM_EXPRESSION"
+        "EXPRESSION : NUMEXPRESSION OPT_EXPRESSION"
         pass
 
-    def p_opt_rel_op_num_expression(self, p):
-        """OPT_REL_OP_NUM_EXPRESSION    : REL_OP NUMEXPRESSION
+    def p_opt_expression(self, p):
+        """OPT_EXPRESSION    : REL_OP NUMEXPRESSION
                                         | empty"""
         pass
 
@@ -239,4 +239,10 @@ class CC20221SyntacticAnalyzer:
         pass
 
     def parse(self, source_code: str, **kwargs):
-        self.parser.parse(source_code, lexer=self.lexer, **kwargs)
+        try:
+            self.parser.parse(source_code, lexer=self.lexer, **kwargs)
+        except CC20221SyntaxError as e:
+            print(e)
+            return "failed"
+        return "success"
+        
