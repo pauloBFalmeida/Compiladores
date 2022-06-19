@@ -53,88 +53,104 @@ def p_prog_statement(p):
     '''PROGRAM  : STATEMENT
                 | FUNCLIST
                 | empty'''
-    p[0] = p[1]
+    # p[0] = p[1]
+    pass
 
 
 def p_funclist(p):
     'FUNCLIST : FUNCDEF FUNCLISTAUX'
-    p[0] = (p[1], p[2])
+    # p[0] = (p[1], p[2])
+    pass
 
 
 def p_funclistaux(p):
     '''FUNCLISTAUX  : FUNCLIST
                     | empty'''
-    p[0] = p[1]
+    # p[0] = p[1]
+    pass
 
 
 def p_fundef(p):
     'FUNCDEF : DEF IDENT LPARENTHESIS PARAMLIST RPARENTHESIS LCURLYBRACKET STATELIST RCURLYBRACKET'
-    p[0] = (p[2], p[4], p[7])
+    # p[0] = (p[2], p[4], p[7])
+    pass
+
 
 
 def p_paramlist(p):
     '''PARAMLIST    : DATATYPE IDENT PARAMLISTAUX
                     | empty'''
-    if len(p) == 4:
-        p[0] = (p[1], p[2], p[3])
-    else:
-        p[0] = None
+    # if len(p) == 4:
+    #     p[0] = (p[1], p[2], p[3])
+    # else:
+    #     p[0] = None
+    pass
 
 
 def p_paramlist_aux(p):
     '''PARAMLISTAUX : COMMA PARAMLIST
                     | empty'''
-    if len(p) == 3:
-        p[0] = p[2]
-    else:
-        p[0] = None
+    # if len(p) == 3:
+    #     p[0] = p[2]
+    # else:
+    #     p[0] = None
+    pass
 
 
 def p_datatype(p):
     '''DATATYPE : INT
                 | FLOAT
                 | STRING'''
-    p[0] = p[1]
+    # p[0] = p[1]
+    pass
 
 
 def p_statement_vardecl(p):
     'STATEMENT : VARDECL SEMICOLON'
-    p[0] = p[1]
+    # p[0] = p[1]
+    pass
 
 
 def p_statement_atrib(p):
     'STATEMENT : ATRIBSTAT SEMICOLON'
-    p[0] = p[1]
+    # p[0] = p[1]
+    pass
 
 
 def p_statement_print(p):
     'STATEMENT : PRINTSTAT SEMICOLON'
-    p[0] = p[1]
+    # p[0] = p[1]
+    pass
 
 
 def p_statement_read(p):
     'STATEMENT : READSTAT SEMICOLON'
-    p[0] = p[1]
+    # p[0] = p[1]
+    pass
 
 
 def p_statement_return(p):
     'STATEMENT : RETURNSTAT SEMICOLON'
-    p[0] = p[1]
+    # p[0] = p[1]
+    pass
 
 
 def p_statement_if(p):
     'STATEMENT : IFSTAT'
-    p[0] = p[1]
+    # p[0] = p[1]
+    pass
 
 
 def p_statement_for(p):
     'STATEMENT : FORSTAT'
-    p[0] = p[1]
+    # p[0] = p[1]
+    pass
 
 
 def p_statement_state(p):
     'STATEMENT : LCURLYBRACKET STATELIST RCURLYBRACKET'
-    p[0] = p[2]
+    # p[0] = p[2]
+    pass
 
 
 def p_statement_term(p):
@@ -145,21 +161,21 @@ def p_statement_term(p):
 
 def p_vardecl(p):
     'VARDECL : DATATYPE IDENT OPTIONAL_VEC'
-    p[0] = (p[1], p[2], p[3])
-
+    # p[0] = (p[1], p[2], p[3])
+    pass
 
 def p_optional_vec(p):
     '''OPTIONAL_VEC : LBRACKET INT_CONSTANT RBRACKET OPTIONAL_VEC
                     | empty'''
-    if len(p) == 5:
-        p[0] = (p[2], p[4])
-    else:
-        p[0] = None
-
+    # if len(p) == 5:
+    #     p[0] = (p[2], p[4])
+    # else:
+    #     p[0] = None
+    pass
 def p_atribstat(p):
     'ATRIBSTAT : LVALUE ASSIGNMENT R_ATRIB'
-    p[0] = (p[1], p[3])
-
+    # p[0] = (p[1], p[3])
+    pass
 # def p_atribstat(p):
 #     '''ATRIBSTAT    : IDENT LBRACKET NUMEXPRESSION RBRACKET OPT_NUMEXPRESSION ASSIGNMENT R_ATRIB
 #                     | IDENT ASSIGNMENT R_ATRIB'''
@@ -174,24 +190,28 @@ def p_r_atrib(p):
     '''R_ATRIB  : EXPRESSION
                 | ALLOCEXPRESSION
                 | FUNCCALL'''
-    p[0] = p[1]
+    # p[0] = p[1]
+    pass
 
 
 def p_funccall(p):
     'FUNCCALL : IDENT LPARENTHESIS PARAMLISTCALL RPARENTHESIS'
-    p[0] = (p[1], p[3])
+    # p[0] = (p[1], p[3])
+    pass
 
 def p_paramlistcall(p):
     'PARAMLISTCALL : IDENT PARAMLISTCALLAUX'
-    p[0] = (p[1], p[2])
+    # p[0] = (p[1], p[2])
+    pass
 
 def p_paramlistcall_aux(p):
     '''PARAMLISTCALLAUX : COMMA PARAMLISTCALL
                         | empty'''
-    if len(p) == 3:
-        p[0] = p[2]
-    else:
-        p[0] = None
+    # if len(p) == 3:
+    #     p[0] = p[2]
+    # else:
+    #     p[0] = None
+    pass
 
 # def p_funccall(p):
 #     'FUNCCALL : IDENT LPARENTHESIS IDENT PARAMLISTCALLAUX RPARENTHESIS'
@@ -209,75 +229,85 @@ def p_paramlistcall_aux(p):
 
 def p_printstat(p):
     'PRINTSTAT : PRINT EXPRESSION'
-    p[0] = p[2]
+    # p[0] = p[2]
+    pass
 
 
 def p_readstat(p):
     'READSTAT : READ LVALUE'
-    p[0] = p[2]
+    # p[0] = p[2]
+    pass
 
 
 def p_returnstat(p):
     'RETURNSTAT : RETURN'
-    p[0] = p[1]
+    # p[0] = p[1]
+    pass
 
 
 def p_ifstat(p):
     'IFSTAT : IF LPARENTHESIS EXPRESSION RPARENTHESIS STATEMENT IFAUX'
-    p[0] = (p[3], p[5], p[6])
-
+    # p[0] = (p[3], p[5], p[6])
+    pass
 
 def p_ifaux(p):
     '''IFAUX    : ELSE STATEMENT
                 | empty'''
-    if len(p) == 3:
-        p[0] = p[2]
-    else:
-        p[0] = None
+    # if len(p) == 3:
+    #     p[0] = p[2]
+    # else:
+    #     p[0] = None
+    pass
 
 
 def p_forstat(p):
     'FORSTAT : FOR LPARENTHESIS ATRIBSTAT SEMICOLON EXPRESSION SEMICOLON ATRIBSTAT RPARENTHESIS STATEMENT'
-    p[0] = (p[3], p[5], p[7], p[9])
+    # p[0] = (p[3], p[5], p[7], p[9])
+    pass
 
 
 def p_statelist(p):
     'STATELIST : STATEMENT OPT_STATELIST'
-    p[0] = (p[1], p[2])
+    # p[0] = (p[1], p[2])
+    pass
 
 
 def p_opt_statelist(p):
     '''OPT_STATELIST    : STATELIST
                         | empty'''
-    p[0] = p[1]
+    # p[0] = p[1]
+    pass
 
 
 def p_allocexp(p):
     'ALLOCEXPRESSION : NEW DATATYPE LBRACKET NUMEXPRESSION RBRACKET OPT_NUMEXPRESSION'
-    p[0] = (p[2], p[4], p[6])
+    # p[0] = (p[2], p[4], p[6])
+    pass
 
 
 def p_opt_numexpression(p):
     '''OPT_NUMEXPRESSION    : LBRACKET NUMEXPRESSION RBRACKET OPT_NUMEXPRESSION
-                            | empty'''
-    if len(p) == 5:
-        p[0] = (p[2], p[4])
-    else:
-        p[0] = None
-
+                            | empty''' 
+    # if len(p) == 5:
+    #     p[0] = (p[2], p[4])
+    # else:
+    #     p[0] = None
+    pass
 
 def p_expression(p):
     'EXPRESSION : NUMEXPRESSION OPT_REL_OP_NUM_EXPRESSION'
-    p[0] = (p[1], p[2])
+    # p[0] = (p[1], p[2])
+    pass
 
 
 def p_opt_rel_op_num_expression(p):
     '''OPT_REL_OP_NUM_EXPRESSION    : REL_OP NUMEXPRESSION
                                     | empty'''
-    if len(p) == 3:
-        p[0] = (p[1], p[2])
-    else:
-        p[0] = None
+    # if len(p) == 3:
+    #     p[0] = (p[1], p[2])
+    # else:
+    #     p[0] = None
+    pass
 
 
 def p_relop_lt(p):
@@ -287,81 +317,62 @@ def p_relop_lt(p):
                 | GREATEREQUAL
                 | EQUAL
                 | DIFFERENT'''
-    p[0] = p[1]
-
-
-# def p_relop_gt(p):
-#     'REL_OP : GREATERTHAN'
-#     pass
-
-
-# def p_relop_lte(p):
-#     'REL_OP : LESSEQUAL'
-#     pass
-
-
-# def p_relop_gte(p):
-#     'REL_OP : GREATEREQUAL'
-#     pass
-
-
-# def p_relop_eq(p):
-#     'REL_OP : EQUAL'
-#     pass
-
-
-# def p_relop_neq(p):
-#     'REL_OP : DIFFERENT'
-#     pass
+    # p[0] = p[1]
+    pass
 
 
 def p_numexpression(p):
     'NUMEXPRESSION : TERM OTHERTERM'
-    p[0] = (p[1], p[2])
+    # p[0] = (p[1], p[2])
+    pass
 
 
 def p_otherterm(p):
     '''OTHERTERM    : PLUS_OR_MINUS TERM OTHERTERM
                     | empty'''
-    if len(p) == 4:
-        p[0] = (p[1], p[2], p[3])
-    else:
-        p[0] = None
-
+    # if len(p) == 4:
+    #     p[0] = (p[1], p[2], p[3])
+    # else:
+    #     p[0] = None
+    pass
 
 def p_plus_or_minus(p):
     '''PLUS_OR_MINUS    : PLUS
                         | MINUS'''
-    p[0] = p[1]
+    # p[0] = p[1]
+    pass
 
 
 def p_term(p):
     'TERM : UNARYEXPR OPT_UNARYEXPR'
-    p[0] = (p[1], p[2])
+    # p[0] = (p[1], p[2])
+    pass
 
 
 def p_opt_unary_expr(p):
     '''OPT_UNARYEXPR    : OPERATOR UNARYEXPR OPT_UNARYEXPR
                         | empty'''
-    if len(p) == 4:
-        p[0] = (p[1], p[2], p[3])
-    else:
-        p[0] = None
-
+    # if len(p) == 4:
+    #     p[0] = (p[1], p[2], p[3])
+    # else:
+    #     p[0] = None
+    pass
 
 def p_operator(p):
     '''OPERATOR : MULT
                 | MOD
                 | DIV'''
-    p[0] = p[1]
+    # p[0] = p[1]
+    pass
 
 def p_unary_exp(p):
     '''UNARYEXPR    : PLUS_OR_MINUS FACTOR
                     | FACTOR'''
-    if len(p) == 3:
-        p[0] = (p[1], p[2])
-    else:
-        p[0] = p[1]
+    # if len(p) == 3:
+    #     p[0] = (p[1], p[2])
+    # else:
+    #     p[0] = p[1]
+    pass
 
 def p_factor_const(p):
     '''FACTOR : INT_CONSTANT
@@ -369,17 +380,20 @@ def p_factor_const(p):
                 | STRING_CONSTANT
                 | NULL
                 | LVALUE'''
-    p[0] = p[1]
+    # p[0] = p[1]
+    pass
 
 
 def p_factor_numexpression(p):
     'FACTOR : LPARENTHESIS NUMEXPRESSION RPARENTHESIS'
-    p[0] = p[2]
+    # p[0] = p[2]
+    pass
 
 
 def p_lvalue(p):
     'LVALUE : IDENT OPT_NUMEXPRESSION'
-    p[0] = (p[1], p[2])
+    pass
+    # p[0] = (p[1], p[2])
 
 # Constrói parser
 parser = yacc.yacc(start="PROGRAM", debug=True)

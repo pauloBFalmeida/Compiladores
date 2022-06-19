@@ -29,22 +29,18 @@ class CC20221Lexer:
         "INT_CONSTANT",
         "FLOAT_CONSTANT",
         "STRING_CONSTANT",
-
         "LPARENTHESIS",
         "RPARENTHESIS",
         "LBRACKET",
         "RBRACKET",
         "LCURLYBRACKET",
         "RCURLYBRACKET",
-
         "SEMICOLON",
         "COMMA",
-
         "ASSIGNMENT",
         "EQUAL",
         "MINUS",
         "PLUS",
-
         "LESSTHAN",
         "GREATERTHAN",
         "LESSEQUAL",
@@ -112,19 +108,23 @@ class CC20221Lexer:
         )
 
     def token(self):
+        """Wrapper for token function"""
         return self.lexer.token()
 
     def input(self, source_code):
-        """Create list of tokens from source code"""
+        """Wrapper for input function"""
         self.lexer.input(source_code)
-        # tokens = []
-        # while True:
-        #     tok = self.lexer.token()
-        #     if not tok:
-        #         break  # No more input
-        #     tokens.append(tok)
-        # return tokens
 
+    def tokenize(self, source_code):
+        """Create list of tokens from source code"""
+        self.input(source_code)
+        tokens = []
+        while True:
+            tok = self.token()
+            if not tok:
+                break  # EOF
+            tokens.append(tok)
+        return tokens
 
 
 class IllegalTokenError(Exception):
