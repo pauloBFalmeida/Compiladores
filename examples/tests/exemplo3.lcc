@@ -3,19 +3,26 @@ def fib(int n)
   if (n <= 1){
     return;
   }
-  int a = n-1;
-  int b = n-2;
-  int c = fib(a);
-  int d = fib(b);
-  int e = c + d;
+  int a;
+  a = n-1;
+  int b;
+  b = n-2;
+  int c;
+  c = fib(a);
+  int d;
+  d = fib(b);
+  int e;
+  e = c + d;
 
   return;
 }
 
 def main()
 {
-    int n = 9;
-    int x = fib(n);
+    int n;
+    n = 9;
+    int x;
+    x = fib(n);
     print x;
     return;
 }

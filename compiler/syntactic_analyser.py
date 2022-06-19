@@ -17,13 +17,13 @@ class CC20221SyntaxError(Exception):
 # #  na tabela de reconhecimento sintático que está vazia (qual é a forma sentencial α,
 # #  qual é o símbolo não-terminal mais à esquerda de α e qual é o token da entrada)
 def p_error(p):
-    while True:
-        token = parser.token()
-        if not token or token.type == 'SEMICOLON':
-            break
-    parser.errok()
-    return token
-    #raise CC20221SyntaxError(f"Syntax error in input {str(p)}")
+    # while True:
+    #     token = parser.token()
+    #     if not token or token.type == 'SEMICOLON':
+    #         break
+    # parser.errok()
+    # return token
+    raise CC20221SyntaxError(f"Syntax error in input {str(p)}")
 
 
 # Gambiarra pra reconhecer uma sequência IDENT ATRIBSTAT
@@ -388,7 +388,7 @@ from pathlib import Path
 
 EXAMPLES_PATH = Path(__file__).parents[1]
 
-with (EXAMPLES_PATH / "examples/tests/exemplo3.lcc").open("r") as f:
+with (EXAMPLES_PATH / "examples/strings.lcc").open("r") as f:
     s = f.read()
 
 result = parser.parse(s, debug=True, lexer=lexer)

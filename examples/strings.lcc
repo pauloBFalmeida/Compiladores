@@ -8,7 +8,7 @@ def stringLenght(string input) {
         lenght = lenght + 1;
     }
 
-    return lenght;
+    return;
 }
 
 // Retorna frequência de determinada letra em uma string
@@ -16,18 +16,22 @@ def letterFrequency(string input, string letter) {
 
     int i;
     int letterCount;
+    string lenght;
+    length = stringLength(letter);
 
-    if(stringLenght(letter) > 1) {
-        return null;
+    if(length > 1) {
+        return;
     }
 
-    for (i = 0; i < stringLenght(input); i = i + 1 ) {
+    length = stringLength(input);
+
+    for (i = 0; i < length; i = i + 1 ) {
         if(input[i] == letter) {
             letterCount = letterCount + 1;
         }
     }
 
-    return letterCount;
+    return;
 }
 
 // Conta quantas vogais e consoantes há na string
@@ -39,32 +43,39 @@ def countVowelsAndConsonants(string input) {
   vowels = 0;
   consonants = 0;
 
-  for (i = 0; i < stringLenght(input); i = i + 1) {
+  string length;
+  length = stringLength(input);
+
+  for (i = 0; i < length; i = i + 1) {
 
     // convert character to lowercase
-    input[i] = toLowerCase(input[i]);
+    string character;
+    character = input[i];
+    input[i] = toLowerCase(character);
+    character = input[i];
 
     // check if the character is a vowel
-    if (input[i] == "a") {
+    if (character == "a") {
         vowels = vowels + 1;
-    } else if (input[i] == "e") {
+    } else if (character == "e") {
         vowels = vowels + 1;
-    } else if (input[i] == "i") {
+    } else if (character == "i") {
         vowels = vowels + 1;
-    } else if (input[i] == "o") {
+    } else if (character == "o") {
         vowels = vowels + 1;
-    } else if (input[i] == "u") {
+    } else if (character == "u") {
         vowels = vowels + 1;
-    } else if (input[i] >= "a") {
-        if (input[i] <= "z") {
+    } else if (character >= "a") {
+        if (character <= "z") {
             consonants = consonants + 1;
         }
     }
   }
 
   int returnValue[2];
-  returnValue = [vowels, consonants]
-  return returnValue;
+  returnValue[1] = vowels;
+  returnValue[2] = consonants;
+  return;
 }
 
 // Conta espaços em branco da string
@@ -74,15 +85,20 @@ def countWhitespaces(string input) {
     int whitespaces;
     i = 0;
     whitespaces = 0;
+    string length;
+    length = stringLenght(input);
 
-    for (i = 0; i < stringLenght(input); i = i + 1) {
+    for (i = 0; i < length; i = i + 1) {
 
-        if (input[i] == " ") {
+        string character;
+        character = input[i];
+
+        if (character == " ") {
             whitespaces = whitespaces + 1;
         } 
     }
 
-    return whitespaces;
+    return;
 }
 
 def main() {
@@ -90,20 +106,28 @@ def main() {
   int input;
 
   print("Enter a string: ");
-  read(input);
+  read input ;
 
   int whitespaceNum;
   whitespaceNum = countWhitespaces(input);
 
-  print("Number of whitespaces in the string: " + toString(whitespaceNum))
+  string whitespaceToString;
+  whitespaceToString = toString(whitespaceNum);
+
+  print("Number of whitespaces in the string: " + whitespaceToString);
 
   int vowelsAndConsonantsNum[2];
   vowelsAndConsonantsNum = countVowelsAndConsonants(input);
-  int vowelNum = vowelsAndConsonantsNum[1];
-  int consonantNum = vowelsAndConsonantsNum[2];
+  vowelNum = vowelsAndConsonantsNum[1];
+  consonantNum = vowelsAndConsonantsNum[2];
 
-  print("Number of vowels in the string: " + toString(vowelNum))
-  print("Number of consonants in the string: " + toString(consonantNum))
+  string vowelNumToString;
+  vowelNumToString = toString(vowelNum);
+  string consonantNumToString;
+  consonantNumToString = toString(vowelNum);
 
-  return 0;
+  print("Number of vowels in the string: " + vowelNumToString);
+  print("Number of consonants in the string: " + consonantNumToString);
+
+  return;
 }
