@@ -13,11 +13,35 @@ class CC20221SyntaxError(Exception):
     pass
 
 
-# TODO: uma mensagem de insucesso indicando qual é a entrada
-#  na tabela de reconhecimento sintático que está vazia (qual é a forma sentencial α,
-#  qual é o símbolo não-terminal mais à esquerda de α e qual é o token da entrada)
+# # TODO: uma mensagem de insucesso indicando qual é a entrada
+# #  na tabela de reconhecimento sintático que está vazia (qual é a forma sentencial α,
+# #  qual é o símbolo não-terminal mais à esquerda de α e qual é o token da entrada)
 def p_error(p):
-    raise CC20221SyntaxError(f"Syntax error in input {str(p)}")
+    while True:
+        token = parser.token()
+        if not token or token.type == 'SEMICOLON':
+            break
+    parser.errok()
+    return token
+    #raise CC20221SyntaxError(f"Syntax error in input {str(p)}")
+
+
+# Gambiarra pra reconhecer uma sequência IDENT ATRIBSTAT
+# considerando única e exclusivamente o exemplo 3
+# def p_error(p):
+#     if p.type == 'ASSIGNMENT':
+#         prev_token = parser.symstack.pop()
+#         if prev_token.type == "IDENT":
+#             prev_token.type = "ATRIBSTAT"
+#             while True:
+#                 token = parser.token()
+#                 if not token or token.type == 'SEMICOLON':
+#                     break
+#             #semicolon = parser.symstack.pop()
+#             parser.symstack.append(prev_token)
+#             #parser.symstack.append(semicolon)
+#     parser.errok()
+#     return token
 
 
 def p_empty(p):
@@ -132,53 +156,55 @@ def p_optional_vec(p):
     else:
         p[0] = None
 
-# hora da gambiarra
+def p_atribstat(p):
+    'ATRIBSTAT : LVALUE ASSIGNMENT R_ATRIB'
+    p[0] = (p[1], p[3])
+
 # def p_atribstat(p):
-#     'ATRIBSTAT : LVALUE ASSIGNMENT R_ATRIB'
+#     '''ATRIBSTAT    : IDENT LBRACKET NUMEXPRESSION RBRACKET OPT_NUMEXPRESSION ASSIGNMENT R_ATRIB
+#                     | IDENT ASSIGNMENT R_ATRIB'''
 #     p[0] = (p[1], p[3])
 
-def p_atribstat(p):
-    '''ATRIBSTAT    : IDENT OPT_NUMEXPRESSION ASSIGNMENT R_ATRIB
-                    | IDENT ASSIGNMENT R_ATRIB'''
-    p[0] = (p[1], p[3])
+# def p_atribstat_error(p):
+#     'ATRIBSTAT    : error ASSIGNMENT R_ATRIB'
+#     print("Syntax error in variable assignment statement. Bad expression")
 
 
 def p_r_atrib(p):
-    '''R_ATRIB   : EXPRESSION
+    '''R_ATRIB  : EXPRESSION
                 | ALLOCEXPRESSION
                 | FUNCCALL'''
     p[0] = p[1]
 
 
-# gambiarra 2
-# def p_funccall(p):
-#     'FUNCCALL : IDENT LPARENTHESIS PARAMLISTCALL RPARENTHESIS'
-#     p[0] = (p[1], p[3])
-
-# def p_paramlistcall(p):
-#     'PARAMLISTCALL : IDENT PARAMLISTCALLAUX'
-#     p[0] = (p[1], p[2])
-
-# def p_paramlistcall_aux(p):
-#     '''PARAMLISTCALLAUX : COMMA PARAMLISTCALL
-#                         | empty'''
-#     if len(p) == 3:
-#         p[0] = p[2]
-#     else:
-#         p[0] = None
-
 def p_funccall(p):
-    'FUNCCALL : IDENT LPARENTHESIS IDENT PARAMLISTCALLAUX RPARENTHESIS'
+    'FUNCCALL : IDENT LPARENTHESIS PARAMLISTCALL RPARENTHESIS'
     p[0] = (p[1], p[3])
 
+def p_paramlistcall(p):
+    'PARAMLISTCALL : IDENT PARAMLISTCALLAUX'
+    p[0] = (p[1], p[2])
 
 def p_paramlistcall_aux(p):
-    '''PARAMLISTCALLAUX : COMMA IDENT PARAMLISTCALLAUX
+    '''PARAMLISTCALLAUX : COMMA PARAMLISTCALL
                         | empty'''
-    if len(p) == 4:
-        p[0] = (p[2], p[3])
+    if len(p) == 3:
+        p[0] = p[2]
     else:
         p[0] = None
+
+# def p_funccall(p):
+#     'FUNCCALL : IDENT LPARENTHESIS IDENT PARAMLISTCALLAUX RPARENTHESIS'
+#     p[0] = (p[1], p[3])
+
+
+# def p_paramlistcall_aux(p):
+#     '''PARAMLISTCALLAUX : COMMA IDENT PARAMLISTCALLAUX
+#                         | empty'''
+#     if len(p) == 4:
+#         p[0] = (p[2], p[3])
+#     else:
+#         p[0] = None
 
 
 def p_printstat(p):
@@ -355,9 +381,8 @@ def p_lvalue(p):
     'LVALUE : IDENT OPT_NUMEXPRESSION'
     p[0] = (p[1], p[2])
 
-
 # Constrói parser
-parser = yacc.yacc(start="PROGRAM")
+parser = yacc.yacc(start="PROGRAM", debug=True)
 
 from pathlib import Path
 
