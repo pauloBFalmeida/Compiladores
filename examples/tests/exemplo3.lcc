@@ -1,7 +1,7 @@
 def fib(int n)
 {
   if (n <= 1){
-    return n;
+    return;
   }
   int a = n-1;
   int b = n-2;
@@ -9,7 +9,7 @@ def fib(int n)
   int d = fib(b);
   int e = c + d;
 
-  return e;
+  return;
 }
 
 def main()
