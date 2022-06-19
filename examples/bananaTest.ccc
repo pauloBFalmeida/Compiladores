@@ -1,0 +1,104 @@
+def fib(int n)
+{
+  if (n <= 1){
+    return;
+  }
+  int a;
+  a = n-1;
+  int b;
+  b = n-2;
+  int c;
+  c = fib(a);
+  int d;
+  d = fib(b);
+  int e;
+  e = c + d;
+
+  return;
+}
+
+def main()
+{
+    int n;
+    n = 9;
+    int x;
+    x = fib(n);
+    print x;
+    return;
+}
+
+def func1(int A, int B)
+{
+  int SM[2];
+  SM[0] = A + B;
+  SM[1] = B * C;
+  return;
+}
+
+def principal()
+{
+  int C;
+  int D;
+  int R;
+  C = 4;
+  D = 5;
+  R = func1(C, D);
+  return;
+}
+
+def bananaTest()
+{
+  float x;
+  float z;
+  int i;
+  int max;
+  x = 0;
+  max = 10000;
+  for (i = 1; i <= max; i = i + 1) {
+      print x;
+      x = x + 0.001;
+      z = x;
+      if (z != x) {
+          print "Erro numérico na atribuição de números na notação ponto flutuante!";
+          break;
+      }
+  }
+
+  {
+    int y;
+    int j;
+    int i;
+    y = new int[10];
+    j = 0;
+    for (i = 0; i < 20; i = i + 1)
+        if (i % 2 == 0){
+          y[j] = i + 1;
+          j = j + 1;
+        }
+        else
+          print "banana";
+
+    for (i = 0; i < 10; i = i + 1)
+        print y[i];
+
+    return;
+  }
+}
+
+def orange_test(string banana)
+{
+  int umdoistresquatro;
+  umdoistresquatro = 1234;
+  int quatrocincoseissete;
+  quatrocincoseissete = 4567;
+  int resultadofunc1;
+  resultadofunc1 = func1(umdoistresquatro, quatrocincoseissete);
+  // verificamos agora se a banana é uma laranja
+  string orange;
+  orange = "laranja";
+  if (banana == orange) {
+    print "voce esta errado";
+  }
+  else
+    print "yesss";
+}

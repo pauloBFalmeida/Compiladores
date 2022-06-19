@@ -7,29 +7,30 @@ Integrantes:
     * Paulo Almeida
     * Pedro Aquino
 
+Exercício-Programa 1: Analisador Léxico 
 Exercício-Programa 2: Analisador Sintático
 """
 
-from lexical_analyser import CC20221Lexer, IllegalTokenError
-from utils import SymbolTable, create_symbol_table
+from pathlib import Path
+
+from compiler.lexical_analyzer import CC20221Lexer, IllegalTokenError
+from compiler.syntactic_analyzer import CC20221SyntacticAnalyzer
+from compiler.utils import SymbolTable, create_symbol_table
 
 
-def exercicio_programa1(filename):
-
-    # Read entry file
-    with open(filename, "r", encoding="utf-8") as f:
-        data = f.read()
+def exercicio_programa1(source_code: str):
+    """Analisador léxico"""
     lexer = CC20221Lexer()
 
     tokens = []
     symbol_table: SymbolTable = {}
 
     try:
-        tokens = lexer.tokenize(data)
+        tokens = lexer.tokenize(source_code)
         symbol_table = create_symbol_table(tokens)
     except IllegalTokenError as error:
         print(error)
-    
+
     if tokens:
         for tok in tokens:
             print(tok)
@@ -38,16 +39,28 @@ def exercicio_programa1(filename):
             print(row)
 
 
-def exercicio_programa2():
-    pass
+def exercicio_programa2(s):
+    """Analisador sintático"""
+    parser = CC20221SyntacticAnalyzer()
+    parser.parse(s, debug=True)
 
 
 if __name__ == "__main__":
-    # TODO: maybe change this to use argparse
     import sys
 
+    filename = sys.argv[1]
+    s = None
+
     try:
-        argv = sys.argv[1]
-        exercicio_programa1(argv)
-    except (IndexError, FileNotFoundError):
-        print("File not found! Try again with a valid file name :)")
+        with (Path(__file__).parent / f"{filename}").open("r") as f:
+            s = f.read()
+    except (FileNotFoundError, IndexError):
+        print("Favor inserir um nome de arquivo válido :(")
+    
+    if s:        
+        if sys.argv[2] == "ep1":
+            exercicio_programa1(s)
+        elif sys.argv[2] == "ep2":
+            exercicio_programa2(s)
+        else:
+            print("Essa tarefa ainda não foi implementada :(")

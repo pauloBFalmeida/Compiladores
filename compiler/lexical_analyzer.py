@@ -1,8 +1,8 @@
-from ply import lex
+from compiler.ply import lex
 
 
 class CC20221Lexer:
-    """Lexical Analyser for CC-2022-1 Language"""
+    """Lexical Analyzer for CC-2022-1 Language"""
 
     def __init__(self, **kwargs) -> None:
         self.lexer = lex.lex(module=self, **kwargs)

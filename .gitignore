@@ -4,5 +4,5 @@
 *.idea
 *.mypy_cache
 
-# *parser.out
-# *parsetab.py
+*parser.out
+*parsetab.py

@@ -1,12 +1,9 @@
 from dataclasses import dataclass
 from typing import Dict, List
 
-from ply.lex import LexToken
+from compiler.ply.lex import LexToken
 
-
-TYPES_TO_STORE = [
-    "IDENT"
-]
+TYPES_TO_STORE = ["IDENT"]
 
 
 @dataclass
@@ -36,11 +33,3 @@ def create_symbol_table(tokens: List[LexToken]) -> SymbolTable:
             else:
                 symbol_table[token.value].lines_referenced.append(token.lineno)  # type: ignore
     return symbol_table
-
-
-@dataclass
-class Scope:
-    pass
-
-
-ScopeStack = List[Scope]
