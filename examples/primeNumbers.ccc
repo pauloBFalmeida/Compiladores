@@ -2,7 +2,7 @@
 def checkPrimeNumber(int n) {
   int j;
   int flag;
-
+  int i;
   flag = 1;
 
   for (j = 2; j <= n / 2; i = j + 1) {

@@ -1,6 +1,6 @@
 // Retorna o comprimento da string
 def stringLenght(string input) {
-
+    int s[5];
     int i;
     int lenght;
     lenght = 0;
@@ -16,7 +16,7 @@ def letterFrequency(string input, string letter) {
 
     int i;
     int letterCount;
-    string lenght;
+    string length;
     length = stringLength(letter);
 
     if(length > 1) {
@@ -118,6 +118,8 @@ def main() {
 
   int vowelsAndConsonantsNum[2];
   vowelsAndConsonantsNum = countVowelsAndConsonants(input);
+  int vowelNum;
+  int consonantNum;
   vowelNum = vowelsAndConsonantsNum[1];
   consonantNum = vowelsAndConsonantsNum[2];
 

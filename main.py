@@ -15,6 +15,7 @@ from pathlib import Path
 
 from compiler.lexical_analyzer import CC20221Lexer, IllegalTokenError
 from compiler.syntactic_analyzer import CC20221SyntacticAnalyzer
+from compiler.semantic_analyzer import CC20221SemanticAnalyzer
 from compiler.utils import SymbolTable, create_symbol_table
 
 
@@ -46,6 +47,13 @@ def exercicio_programa2(source_code: str) -> None:
     print(output)
 
 
+def exercicio_programa3_asem(source_code: str) -> None:
+    """Analisador sintático"""
+    parser = CC20221SemanticAnalyzer()
+    output = parser.parse(source_code, debug=False)
+    print(output)
+
+
 if __name__ == "__main__":
     import sys
 
@@ -63,5 +71,7 @@ if __name__ == "__main__":
             exercicio_programa1(s)
         elif sys.argv[2] == "syntactic":
             exercicio_programa2(s)
+        elif sys.argv[2] == "semantic":
+            exercicio_programa3_asem(s)
         else:
-            print("Essa tarefa ainda não foi implementada :(")
+            print("Escolha uma opção válida")

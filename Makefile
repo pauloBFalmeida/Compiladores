@@ -29,3 +29,17 @@ syntactic_primeNumbers:
 
 syntactic_strings:
 	python main.py examples/strings.ccc syntactic
+
+
+# Execute any of the following tasks to run a Semantic Analyzer example
+semantic_bananaTest: 
+	python main.py examples/bananaTest.ccc semantic
+
+semantic_baseConversions:
+	python main.py examples/baseConversions.ccc semantic
+
+semantic_primeNumbers:
+	python main.py examples/primeNumbers.ccc semantic
+
+semantic_strings:
+	python main.py examples/strings.ccc semantic
